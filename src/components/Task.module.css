@@ -1,0 +1,162 @@
+form {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: -5rem;
+}
+
+footer {
+    display: flex;
+}
+
+form textarea {
+    color: var(--gray-100);
+    border: 1px solid var(--gray-700);
+    resize: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px;
+    gap: 8px;
+    width: 100%;
+    height: var(--form-height);
+    background: var(--gray-500);
+    border-radius: 8px;
+}
+
+form textarea:focus {
+    outline: transparent;
+    border: 1px solid var(--purple);
+}
+
+button[type=submit] {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--gray-100);
+    background: var(--blue-dark);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border-radius: 8px;
+    padding: 0 14px;
+}
+
+button[type=submit]:not(:disabled):hover {
+    cursor: pointer;
+    background: var(--blue);
+}
+
+button[type=submit]:disabled {
+    opacity: 0.7;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6.4rem;
+    margin-bottom: 3.4rem;
+}
+
+.info strong {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.info strong span {
+    color: var(--gray-200);
+    background: var(--gray-400);
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.info strong:nth-child(1) {
+    color: var(--blue);
+}
+
+.info strong:nth-child(2) {
+    color: var(--purple);
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--gray-300);
+    gap: 1.6rem;
+    margin-top: 2.4rem;
+    padding: 6.4rem 2.4rem;
+    border-top: 1px solid var(--gray-400);
+    border-radius: 8px;
+}
+
+.noEmpty {
+    display: hidden;
+    opacity: 0;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    padding: 1.6rem;
+    background: var(--gray-500);
+    border-radius: 8px;
+    border: 1px solid var(--gray-400);
+    margin-bottom: 1.2rem;
+}
+
+.task p {
+    width: 100%;
+}
+
+.task button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task button:nth-child(1) svg {
+    color: var(--blue);
+}
+
+.task button:nth-child(1) svg:hover {
+    color: var(--blue-dark);
+}
+
+.task button:nth-child(3) {
+    color: var(--gray-300);
+}
+
+.task button:nth-child(3) svg:hover {
+    color: var(--danger);
+    background: var(--gray-400);
+    border-radius: 4px;
+    padding: 1px;
+}
+
+.task p {
+    color: var(--gray-100);
+
+}
+
+p.tasked {
+    text-decoration: line-through;
+    color: var(--gray-300);
+}
+
+button.tasked svg {
+    fill: red;
+}
+
+.noTasked {
+    text-decoration: none;
+}
