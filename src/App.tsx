@@ -1,4 +1,4 @@
-import React, { FormEvent, ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import "./global.css";
 import Logo from "./assets/logo.svg";
 import { StylesContainer } from "./styles";
@@ -10,23 +10,38 @@ import {
   Trash,
 } from "phosphor-react";
 
-interface TasksProps {
+interface TaskProps {
   id: number;
   description: string;
   completed: boolean;
 }
 
 export function App() {
-  // Define o estado inicial da lista de tarefas
-  const [tasks, setTasks] = useState<TasksProps[]>([]);
+  const [tasks, setTasks] = useState<TaskProps[]>([]);
 
-  // Função para adicionar uma nova tarefa à lista
+  const [taskValue, setTaskValue] = useState("");
+  const [formValid, setFormValid] = useState(false);
+
   const handleCreateNewTask = (description: string) => {
-    setTasks([...tasks, { id: Date.now(), description, completed: false }]);
+    setTasks([
+      ...tasks,
+      { id: Date.now(), description: description, completed: false },
+    ]);
   };
 
-  // Função para marcar uma tarefa como completa
-  const handleCompleteTask = (id: number) => {
+  const handleChangeForm = (event: ChangeEvent<HTMLInputElement>) => {
+    setTaskValue(event.target.value);
+    setFormValid(event.target.value.length > 0);
+  };
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    handleCreateNewTask(taskValue.trim());
+    setTaskValue("");
+    setFormValid(false);
+  };
+
+  const handleCompletedTask = (id: number) => {
     setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, completed: true } : task
@@ -34,51 +49,32 @@ export function App() {
     );
   };
 
-  // Função para excluir uma tarefa
   const handleDeleteTask = (id: number) => {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  // Função e Estado para validar o formulário
-  const [formValidate, setFormValidate] = useState(false);
-  const [taskValue, setTaskValue] = useState("");
-
-  const handleTaskChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTaskValue(event.target.value);
-    setFormValidate(event.target.value.trim().length > 0);
-  };
-
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    handleCreateNewTask(taskValue.trim());
-    setTaskValue("");
-    setFormValidate(false);
-  };
-
-  // Função para contar o número de tarefas concluídas
-  const taskComplete = tasks.filter((task) => task.completed);
+  const countCompletedTask = tasks.filter((task) => task.completed);
 
   return (
     <StylesContainer>
       <header>
         <img src={Logo} alt="" />
       </header>
-
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="task"
           placeholder="Adicione uma nova tarefa"
+          onChange={handleChangeForm}
           value={taskValue}
-          onChange={handleTaskChange}
         />
-        <button type="submit" disabled={!formValidate}>
+        <button type="submit" disabled={!formValid}>
           Criar
           <PlusCircle size={20} />
         </button>
       </form>
 
-      {tasks.length !== 0 ? (
+      {tasks.length ? (
         <ul>
           <div>
             <h3>
@@ -88,7 +84,7 @@ export function App() {
             <h3>
               Tarefas concluídas
               <span>
-                {taskComplete.length}/{tasks.length}
+                {countCompletedTask.length}/{tasks.length}
               </span>
             </h3>
           </div>
@@ -96,18 +92,20 @@ export function App() {
           {tasks.map((task) => {
             return (
               <li key={task.id}>
-                <button onClick={() => handleCompleteTask(task.id)}>
+                <button onClick={() => handleCompletedTask(task.id)}>
                   {task.completed ? (
                     <CheckCircle size={20} color="var(--purple)" />
                   ) : (
                     <Circle size={20} />
                   )}
                 </button>
+
                 {task.completed ? (
                   <span className="completed">{task.description}</span>
                 ) : (
                   <span>{task.description}</span>
                 )}
+
                 <button onClick={() => handleDeleteTask(task.id)}>
                   <Trash size={20} />
                 </button>
