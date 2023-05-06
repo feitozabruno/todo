@@ -1,154 +1,197 @@
 import styled from "styled-components";
 
-export const StylesContainer = styled.div`
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 20rem;
-    background-color: var(--gray-700);
+export const Header = styled.header`
+  display: flex;
+  justify-content: center;
+  background: var(--gray-700);
+  padding: 7.2rem 0 8rem 0;
+`;
+
+export const Container = styled.section`
+  width: 100%;
+  margin: 0 1rem;
+  max-width: 72.6rem;
+  margin: 0 auto;
+  padding-inline: 2rem;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: -3rem;
+
+  input[type="text"] {
+    width: 100%;
+    max-width: 63.8rem;
+    height: 5.4rem;
+    padding: 1rem;
+    color: var(--gray-100);
+    border: 1px solid var(--gray-700);
+    background-color: var(--gray-500);
+    border-radius: 8px;
   }
 
-  form {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    flex-direction: row;
-    gap: 8px;
-    margin-top: -2.7rem;
-    padding-inline: 1rem;
+  button[type="submit"] {
+    color: var(--gray-100);
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    background: var(--blue-dark);
+    transition: background 0.2s;
 
-    input[type="text"] {
-      width: 63.8rem;
-      height: 5.4rem;
-      padding: 1.6rem;
-      line-height: 1.2;
-      color: var(--gray-100);
-      background-color: var(--gray-500);
-      border: 1px solid var(--gray-700);
-      border-radius: 8px;
-      resize: none;
+    &:disabled {
+      cursor: not-allowed;
     }
+
+    &:not(:disabled):hover {
+      background: var(--blue);
+      cursor: pointer;
+    }
+  }
+`;
+
+export const NoTasks = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.4rem;
+  border-top: 2px solid var(--gray-400);
+  border-radius: 8px;
+
+  svg {
+    margin-top: 6.4rem;
+  }
+
+  strong {
+    margin-top: 1.6rem;
+  }
+
+  strong,
+  p {
+    color: var(--gray-300);
+  }
+`;
+
+export const Summary = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  margin-top: 6.4rem;
+  margin-bottom: 2.4rem;
+
+  span {
+    font-size: 1.2rem;
+    color: var(--gray-200);
+    padding: 2px 8px;
+    background: var(--gray-400);
+    border-radius: 999px;
+    margin-left: 8px;
+  }
+
+  strong:nth-child(1) {
+    color: var(--blue);
+  }
+
+  strong:nth-child(2) {
+    color: var(--purple);
+  }
+`;
+
+export const TasksList = styled.ul`
+  list-style: none;
+
+  li + li {
+    margin-top: 1.6rem;
+  }
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.6rem 0;
+
+    background: var(--gray-500);
+    border: 1px solid var(--gray-400);
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
 
     button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 1.6rem;
-      color: var(--gray-100);
-      background-color: var(--blue-dark);
-      border-radius: 8px;
+      margin-inline: 1.6rem;
+    }
+
+    button:nth-child(1) {
       cursor: pointer;
-      transition: 0.1s background-color;
+      width: 21px;
+      height: 21px;
+      margin-right: 1.2rem;
 
-      &:not([disabled]):hover {
-        background-color: var(--blue);
-      }
+      svg {
+        fill: var(--blue);
+        stroke: var(--blue);
+        stroke-width: 5px;
 
-      &:disabled {
-        cursor: not-allowed;
-        opacity: 0.7;
-      }
-    }
-  }
-
-  ul {
-    margin: 0 auto;
-    width: 73.6rem;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 1.4rem;
-      padding-block: 6.4rem 2.4rem;
-
-      h3 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-
-        &:nth-child(1) {
-          color: var(--blue);
-        }
-
-        &:nth-child(2) {
-          color: var(--purple);
-        }
-      }
-
-      span {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--gray-200);
-        padding: 2px 8px;
-        background-color: var(--gray-400);
-        border-radius: 999px;
-      }
-    }
-
-    li {
-      display: flex;
-      align-items: flex-start;
-      justify-content: left;
-      gap: 1.5rem;
-
-      font-size: 1.4rem;
-      line-height: 1.4;
-
-      padding: 1.6rem;
-      border-radius: 8px;
-      background-color: var(--gray-500);
-
-      span {
-        color: var(--gray-100);
-        width: 63.2rem;
-
-        &.completed {
-          color: var(--gray-300);
-          text-decoration: line-through;
-        }
-      }
-
-      button {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &:nth-child(1) {
-          color: var(--blue);
-        }
-
-        &:nth-child(3) {
-          color: var(--gray-300);
-          transition: color 0.2s;
+        path:nth-child(1) {
+          opacity: 0;
+          transition: opacity 0.2s;
 
           &:hover {
-            color: var(--danger);
+            opacity: 0.2;
           }
         }
       }
     }
+
+    button:nth-child(3) {
+      cursor: pointer;
+      color: var(--gray-300);
+      width: 25px;
+      height: 25px;
+      padding: 5px;
+      transition: background 0.2s;
+
+      &:hover {
+        background: var(--gray-400);
+        color: var(--danger);
+        border-radius: 4px;
+      }
+    }
+
+    span {
+      color: var(--gray-100);
+      font-size: 1.4rem;
+      width: calc(100% - 46px);
+    }
   }
 
-  div.NoTasks {
-    margin: 0 auto;
-    padding-block: 6.4rem;
+  li.task-complete {
+    button:nth-child(1) svg {
+      cursor: initial;
+      fill: var(--purple-dark);
+      stroke: var(--purple-dark);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1.6rem;
+      path:nth-child(1) {
+        fill: var(--purple-dark);
+        opacity: 0.2;
+      }
 
-    color: var(--gray-300);
-    line-height: 1.4;
+      /* &:hover {
+        fill: var(--purple);
+        stroke: var(--purple);
+
+        path:nth-child(1) {
+          fill: var(--purple);
+          opacity: 0.3;
+        }
+      } */
+    }
+
+    span {
+      color: var(--gray-300);
+      text-decoration: line-through;
+    }
   }
 `;
